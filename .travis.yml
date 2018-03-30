@@ -36,3 +36,11 @@ script:
     - cd build
     - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION -DTARGET_CPU=$TARGET_CPU
     - cmake --build .
+
+
+after_script:
+    - pwd
+    - cd ~
+    - pwd
+    - cd build
+    - ls -la
