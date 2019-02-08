@@ -3,21 +3,19 @@
 #include <stdlib.h>
 
 void findLongestSubstring(const char a[], const char b[], char res[]) {
-    int i, j, k, len_a, len_b, substr_i, max_substr;
-    int** matrix;
+    size_t i, j, k, len_a, len_b, substr_i, max_substr;
+    size_t** matrix;
 
-    for(i = 0; a[i] != '\0'; i++)
-        ;
+    for(i = 0; a[i] != '\0'; i++);
     len_a = i;
 
-    for(j = 0; b[j] != '\0'; j++)
-        ;
+    for(j = 0; b[j] != '\0'; j++);
     len_b = j;
 
-    matrix = (int**)malloc((len_a + 1) * sizeof(int*));
+    matrix = (size_t**)malloc((len_a + 1) * sizeof(size_t*));
 
     for(i = 0; i < len_a; i++) {
-        matrix[i] = (int*)malloc((len_b + 1) * sizeof(int));
+        matrix[i] = (size_t*)malloc((len_b + 1) * sizeof(size_t));
         for(j = 0; j < len_b; j++) {
             matrix[i][j] = 0;
         }
