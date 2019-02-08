@@ -1,5 +1,5 @@
-dist:     trusty    # используем Ubuntu 14.04 Trusty Tahr (а не 12.02 Precise Pangolin)
-sudo:     required  # используем Virtual Machine (а не Docker container)
+dist:     xenial    
+sudo:     required  
 
 language: cpp
 
@@ -32,7 +32,17 @@ matrix:
 
 
 script:
+    - cmake --version
     - mkdir build
     - cd build
     - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION -DTARGET_CPU=$TARGET_CPU
     - cmake --build .
+    - ctest -C Debug
+    - ctest -C Release
+
+
+after_script:
+    - uname --all
+    - env
+    - pwd
+    - ls -la
