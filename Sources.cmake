@@ -4,6 +4,7 @@ set(ALGORITHMS_ON_STRINGS_LIB_SRC
 )
 
 set(SORTING_ALGORITHMS_LIB_SRC
+  sorting_algorithms/quick_sort/parallel_and_sequential_quick_sort.cpp
   sorting_algorithms/quick_sort/qsort_test.cpp
   sorting_algorithms/quick_sort/template_qsort.h
 )
