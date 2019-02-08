@@ -1,18 +1,15 @@
-#include "gtest/gtest.h"
-#include "../LongestSubstring.h"
 #include <string>
+#include "../LongestSubstring.h"
+#include "gtest/gtest.h"
 
+TEST(SimpleSmokeTest, Positive) {
+    char str[30] = "qwerty";
+    char str1[30] = "tyqwe";
+    char str2[30];
+    std::string answer;
+    findLongestSubstring(str, str1, str2);
 
-TEST(SimpleSmokeTest, Positive)
-{
-	char str[30] = "qwerty";
-	char str1[30] = "tyqwe";
-	char str2[30];
-	std::string answer;
-	findLongestSubstring(str, str1, str2);
+    answer = str2;
 
-	answer = str2;
-
-	EXPECT_EQ("qwe", answer);
+    EXPECT_EQ("qwe", answer);
 }
-
