@@ -1,5 +1,7 @@
 #include <string>
-#include "../LongestSubstring.h"
+//#include "../algorithms_on_strigns/longest_common_substring/LongestSubstring.h"
+#include "../algorithms_on_strings/longest_common_substring/LongestSubstring.h"
+
 #include "gtest/gtest.h"
 
 TEST(SimpleSmokeTest, Positive) {
