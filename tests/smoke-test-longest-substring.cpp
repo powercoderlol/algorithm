@@ -1,6 +1,6 @@
 #include <string>
-//#include "../algorithms_on_strigns/longest_common_substring/LongestSubstring.h"
-#include "../algorithms_on_strings/longest_common_substring/LongestSubstring.h"
+#include "LongestSubstring.h"
+#include "template_qsort.h"
 
 #include "gtest/gtest.h"
 

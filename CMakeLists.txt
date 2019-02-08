@@ -35,20 +35,24 @@ enable_testing()
 
 include(Sources)
 
-add_library(algorithms_on_strings_lib STATIC ${ALGORITHMS_ON_STRINGS_LIB})
-target_include_directories(algorithms_on_strings_lib
+add_library(algorithms_on_strings STATIC ${ALGORITHMS_ON_STRINGS_LIB_SRC})
+target_include_directories(algorithms_on_strings
   PUBLIC
-  algorithms_on_strings/longest_common_string)
+  algorithms_on_strings/longest_common_substring)
 
 SET(GTEST_LIBS gtest gtest_main)
-SET(ALGO_LIBS algorithms_on_strings_lib)
+SET(STRING_ALGO_LIBS algorithms_on_strings)
 
-#message(STATUS "ALGO_LIBS: ${ALGO_LIBS}")
-message(STATUS "GTEST_LIBS: ${GTEST_LIBS}")
+add_library(sorting_algorithms STATIC ${SORTING_ALGORITHMS_LIB_SRC})
+target_include_directories(sorting_algorithms
+  PUBLIC
+  sorting_algorithms/quick_sort)
+set_property(TARGET sorting_algorithms PROPERTY LINKER_LANGUAGE CXX)
+
+SET(SORTING_ALGO_LIBS sorting_algorithms)
 
 add_executable(smoke-test-longest-substring tests/smoke-test-longest-substring.cpp)
-target_link_libraries(smoke-test-longest-substring ${GTEST_LIBS})
-target_link_libraries(smoke-test-longest-substring ${ALGO_LIBS})
+target_link_libraries(smoke-test-longest-substring ${GTEST_LIBS} ${STRING_ALGO_LIBS} ${SORTING_ALGO_LIBS})
 
 add_test(NAME longest-substring-test COMMAND smoke-test-longest-substring)
 
