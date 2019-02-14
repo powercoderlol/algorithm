@@ -1,48 +1,43 @@
-dist:     xenial    
-sudo:     required  
+dist:  xenial
+sudo:  required
 
 language: cpp
 
 os:
-    - linux
-    - osx
+  - linux
+  - osx
+#  - windows
 
 compiler:
-    - gcc
-    - clang
+  - gcc
+  - clang
 
 env:
-    # список переменных окружения, влияющих на матрицу сборки:
-    - TARGET_CPU=amd64 BUILD_CONFIGURATION=Debug
-    - TARGET_CPU=amd64 BUILD_CONFIGURATION=Release
-    - TARGET_CPU=x86 BUILD_CONFIGURATION=Debug
-    - TARGET_CPU=x86 BUILD_CONFIGURATION=Release
+  - TARGET_CPU=amd64 BUILD_CONFIGURATION=Debug
+  - TARGET_CPU=amd64 BUILD_CONFIGURATION=Release
+  - TARGET_CPU=x86 BUILD_CONFIGURATION=Debug
+  - TARGET_CPU=x86 BUILD_CONFIGURATION=Release
 
 matrix:
-    exclude:
-        # вручную исключим ненужные элементы из матрицы сборки:
-        - os:       osx
-          compiler: gcc
+  exclude:
+  - os:  osx
+    compiler: gcc
 
-        - os:  osx
-          env: TARGET_CPU=x86 BUILD_CONFIGURATION=Debug
+#  - os:  windows
+#    compiler: gcc
 
-        - os:  osx
-          env: TARGET_CPU=x86 BUILD_CONFIGURATION=Release
+  - os:  osx
+    env: TARGET_CPU=x86 BUILD_CONFIGURATION=Debug
+
+  - os:  osx
+    env: TARGET_CPU=x86 BUILD_CONFIGURATION=Release
 
 
 script:
-    - cmake --version
-    - mkdir build
-    - cd build
-    - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION -DTARGET_CPU=$TARGET_CPU
-    - cmake --build .
-    - ctest -C Debug
-    - ctest -C Release
-
-
-after_script:
-    - uname --all
-    - env
-    - pwd
-    - ls -la
+  - cmake --version
+  - mkdir build
+  - cd build
+  - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION -DTARGET_CPU=$TARGET_CPU
+  - cmake --build .
+  - ctest -C Debug
+  - ctest -C Release
