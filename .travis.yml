@@ -1,21 +1,19 @@
 dist:  xenial
-sudo:  required
 
 language: cpp
 
 os:
   - linux
   - osx
-#  - windows
 
 compiler:
   - gcc
   - clang
 
 env:
-  - TARGET_CPU=amd64 BUILD_CONFIGURATION=Debug
+#  - TARGET_CPU=amd64 BUILD_CONFIGURATION=Debug
   - TARGET_CPU=amd64 BUILD_CONFIGURATION=Release
-  - TARGET_CPU=x86 BUILD_CONFIGURATION=Debug
+#  - TARGET_CPU=x86 BUILD_CONFIGURATION=Debug
   - TARGET_CPU=x86 BUILD_CONFIGURATION=Release
 
 matrix:
@@ -23,21 +21,33 @@ matrix:
   - os:  osx
     compiler: gcc
 
-#  - os:  windows
-#    compiler: gcc
-
   - os:  osx
-    env: TARGET_CPU=x86 BUILD_CONFIGURATION=Debug
+    env: TARGET_CPU=amd64 BUILD_CONFIGURATION=Release
 
   - os:  osx
     env: TARGET_CPU=x86 BUILD_CONFIGURATION=Release
 
+linux: &linux
+  os: linux
+  sudo: required
+  language: python
+  python: "3.7"
+
+install:
+  - sudo apt-get update -qq
+  - sudo apt-get install python3-pip -y
+  - sudo apt-get install python3-setuptools -y
+  - sudo python3 -m pip install --upgrade pip
+  - sudo python3 -m pip install conan
+  - conan user
+  - conan --version
+  - conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan
 
 script:
-  - cmake --version
   - mkdir build
   - cd build
+  - conan install .. -s compiler.libcxx=libstdc++11 --build=missing
   - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION -DTARGET_CPU=$TARGET_CPU
-  - cmake --build .
-  - ctest -C Debug
+  - cmake --build . --config Release
+#  - ctest -C Debug
   - ctest -C Release
