@@ -52,7 +52,7 @@ std::list<T> parallel_quick_sort(std::list<T> input) {
     return result;
 }
 
-int main() {
+int parallel_qsort_test() {
     std::list<int> list1 = {4, 2, 1, 5, 8, 9, 7};
     std::list<int> sorted1 = sequential_quick_sort(list1);
     std::list<int> sorted2 = parallel_quick_sort(list1);
